@@ -1,0 +1,79 @@
+/* --- RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- BACKGROUND --- */
+body {
+    background: linear-gradient(to right, #e3ecff, #fff8f8);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background: #004f9e;
+    padding: 15px 30px;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- CONTAINER --- */
+.dashboard-container {
+    margin: 40px auto;
+    width: 85%;
+}
+
+/* --- CARDS --- */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+    transition: transform .2s ease-in-out;
+    margin-bottom: 25px;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card h3 {
+    font-size: 22px;
+    color: #004f9e;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* --- BUTTONS --- */
+.btn-custom {
+    display: inline-block;
+    background: #004f9e;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.btn-custom:hover {
+    background: #01356c;
+}
+
+/* --- GRID --- */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
