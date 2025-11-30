@@ -40,7 +40,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Numéro</th>
+                            {{-- <th>Numéro</th> --}}
                             <th>RIB</th>
                             <th>Titulaire</th>
                             <th>Solde</th>
@@ -51,7 +51,7 @@
                     <tbody>
                         @foreach ($comptes as $compte)
                             <tr>
-                                <td><strong>{{ $compte->numero_compte ?? 'N/A' }}</strong></td>
+                                {{-- <td><strong>{{ $compte->numero_compte ?? 'N/A' }}</strong></td> --}}
                                 <td><code style="background: var(--light); padding: 4px 8px; border-radius: 4px; font-size: 12px;">{{ $compte->rib ?? 'N/A' }}</code></td>
                                 <td>{{ $compte->client->nom ?? 'N/A' }}</td>
                                 <td><strong style="color: var(--success);">{{ number_format($compte->solde ?? 0, 2, ',', ' ') }} DA</strong></td>

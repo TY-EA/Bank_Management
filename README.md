@@ -1,66 +1,170 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Bank Management (Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Bank Management is a sample banking management application built with Laravel 9. It provides CRUD operations for clients and accounts (comptes) as well as fund transfers (virements) between accounts, a basic authentication flow and a dashboard interface.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Table of Contents
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Features](#features)
+-   [Tech Stack](#tech-stack)
+-   [Requirements](#requirements)
+-   [Installation & Setup](#installation--setup)
+-   [Database & Seeding](#database--seeding)
+-   [Running (Local Development)](#running-local-development)
+-   [API / Routes Summary](#api--routes-summary)
+-   [Testing](#testing)
+-   [Contributing](#contributing)
+-   [License](#license)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   User authentication (login/logout)
+-   Client management: create, edit, delete, show
+-   Account management (Compte): create, edit, delete, show, relationship with clients
+-   Virements (bank transfers): validation, transactional debiting/crediting, and virement history
+-   Dashboard access guarded by authentication
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   PHP 8.0+
+-   Laravel 9
+-   Vite + Laravel Vite Plugin
+-   MySQL (or any database supported by Laravel)
+-   Composer, NPM
 
-## Laravel Sponsors
+## Requirements
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+-   PHP 8.0 or greater
+-   Composer
+-   Node >= 16 (for Vite)
+-   A running database (MySQL, Postgres, or use SQLite for testing)
 
-### Premium Partners
+## Installation & Setup
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1. Clone the repository
+
+```bash
+git clone https://github.com/Bank-Management-Laravel/Bank_Management.git
+cd Bank_Management/Bank_Management
+```
+
+2. Install PHP dependencies
+
+```bash
+composer install
+```
+
+3. Install frontend dependencies
+
+```bash
+npm install
+```
+
+4. Copy `.env.example` to `.env` and set your environment variables
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Edit `.env` to configure your database credentials and other environment values (e.g., APP_URL, DB_CONNECTION, DB_USERNAME, DB_PASSWORD).
+
+5. Run migrations and seeders
+
+```bash
+php artisan migrate --seed
+```
+
+If you don't want to seed sample data, run `php artisan migrate` instead.
+
+---
+
+## Database & Seeding
+
+-   `migrations/` defines tables for `clients`, `comptes`, and `virements`.
+-   There is a `UserSeeder` that creates a sample user used for authentication:
+
+```
+email: aya@gmail.com
+password: 12345678
+```
+
+You can add additional seeders to populate `clients`, `comptes`, or `virements` for testing.
+
+---
+
+## Running (Local Development)
+
+1. Start Vite for frontend assets
+
+```bash
+npm run dev
+```
+
+2. Start the Laravel development server
+
+```bash
+php artisan serve
+```
+
+Open `http://127.0.0.1:8000` and login with the seeded user.
+
+### Optional: Using Laravel Sail (Docker)
+
+If you want to run with Sail and Docker, make sure you have Docker installed then:
+
+```bash
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate --seed
+```
+
+---
+
+## API / Routes Summary
+
+The application exposes the following main web routes (defined in `routes/web.php`):
+
+-   `GET /login` - show login form
+-   `POST /login` - submit credentials
+-   `POST /logout` - logout user
+-   `GET /dashboard` - authenticated dashboard page
+-   Resource controllers (CRUD operations):
+    -   `/clients` -> `ClientController`
+    -   `/comptes` -> `CompteController`
+    -   `/virements` -> `VirementController`
+
+Virement creation enforces checking the source account balance and does the database operations inside a transaction to maintain integrity.
+
+---
+
+## Testing
+
+Run tests with PHPUnit or the Laravel test runner:
+
+```bash
+php artisan test
+# or
+vendor/bin/phpunit
+```
+
+## Environment Variables
+
+Important variables in `.env`: `APP_NAME`, `APP_URL`, `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, `MAIL_*` for mailing.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contributions are welcome! Please open an issue for a feature or bug report, and feel free to submit a PR with a clear description of the problem and a test if possible.
 
-## Code of Conduct
+Guidelines:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+-   Follow PSR-12 for PHP code styling
+-   Use `composer test` and `php artisan test` to validate changes
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is distributed under the MIT license.

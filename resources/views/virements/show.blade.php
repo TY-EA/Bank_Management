@@ -36,9 +36,7 @@
                         <p style="font-size: 13px; color: var(--text); margin-bottom: 4px;">
                             <strong>Titulaire:</strong> {{ $virement->compteSource->client->nom ?? 'N/A' }}
                         </p>
-                        <p style="font-size: 13px; color: var(--text);">
-                            <strong>Numéro:</strong> {{ $virement->compteSource->numero_compte ?? 'N/A' }}
-                        </p>
+
                     @endif
                 </div>
 
@@ -54,9 +52,6 @@
                     @if ($virement->compteDestination)
                         <p style="font-size: 13px; color: var(--text); margin-bottom: 4px;">
                             <strong>Titulaire:</strong> {{ $virement->compteDestination->client->nom ?? 'N/A' }}
-                        </p>
-                        <p style="font-size: 13px; color: var(--text);">
-                            <strong>Numéro:</strong> {{ $virement->compteDestination->numero_compte ?? 'N/A' }}
                         </p>
                     @endif
                 </div>

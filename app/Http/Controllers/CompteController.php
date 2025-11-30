@@ -47,6 +47,8 @@ class CompteController extends Controller
      */
     public function show(Compte $compte)
     {
+        // Eager load client and related virements for efficient rendering in the view
+        $compte->load(['client', 'virementsEnvoyes', 'virementsRecus']);
         return view('comptes.show', compact('compte'));
     }
 
@@ -64,14 +66,14 @@ class CompteController extends Controller
      */
     public function update(Request $request, Compte $compte)
     {
+        // The 'numero_compte' field is not present in the database/migrations, so we don't validate it here.
         $request->validate([
-            'numero_compte' => 'required|string|unique:comptes,numero_compte,' . $compte->id,
             'rib' => 'required|string|unique:comptes,rib,' . $compte->id,
             'solde' => 'required|numeric|min:0',
             'client_id' => 'required|exists:clients,id',
         ]);
 
-        $compte->update($request->only(['numero_compte', 'rib', 'solde', 'client_id']));
+        $compte->update($request->only(['rib', 'solde', 'client_id']));
 
         return redirect()->route('comptes.index')->with('success', 'Compte mis à jour avec succès !');
     }
