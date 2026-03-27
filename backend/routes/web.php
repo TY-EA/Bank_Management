@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 
 
 /*
@@ -18,7 +19,7 @@ use App\Http\Controllers\AuthController;
 
 
 // Routes pour les clients (CRUD complet)
-Route::resource('clients', App\Http\Controllers\ClientController::class);
+Route::resource('clients', ClientController::class);
 
 // Routes pour les comptes (CRUD complet)
 Route::resource('comptes', App\Http\Controllers\CompteController::class);
