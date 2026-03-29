@@ -27,7 +27,7 @@ class CompteController extends Controller
     }
 
     /**
-     * Store a new compte
+     * Store a new compte Method
      */
     public function store(Request $request)
     {
