@@ -10,6 +10,8 @@
     <span>Détails Client</span>
 @endsection
 
+
+<!-- SECTION CONTENT -->
 @section('content')
     <!-- PAGE HEADER -->
     <div class="page-header">
