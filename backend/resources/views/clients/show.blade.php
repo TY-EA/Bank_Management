@@ -11,7 +11,7 @@
 @endsection
 
 
-<!-- SECTION CONTENT -->
+<!-- SECTION CONTENT HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH -->
 @section('content')
     <!-- PAGE HEADER -->
     <div class="page-header">
